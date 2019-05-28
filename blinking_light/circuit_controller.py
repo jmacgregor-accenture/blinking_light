@@ -9,14 +9,18 @@ class CircuitController():
         GPIO.setup(18, GPIO.OUT)
         self.canBlink = False
 
-        while self.canBlink:
+    def startBlink(self):
+        self.canBlink = True
+        thread = threading.Thread(target=self._blink, args=())
+        thread.daemon = True                            # Daemonize thread
+        thread.start()
+
+    def _blink(self):
+        while self.canBlink == True:
             GPIO.output(18, True)
             time.sleep(1)
             GPIO.output(18, False)
             time.sleep(1)
-
-    def startBlink(self):
-        self.canBlink = True
 
     def stopBlink(self):
         self.canBlink = False
