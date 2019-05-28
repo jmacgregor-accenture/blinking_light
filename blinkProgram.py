@@ -12,9 +12,10 @@ while exit != "y":
         if selection == "y":
             seconds = input("How many seconds should it run? ")
             controller.blinkFor(seconds)
-        else:
+        elif selection == "n":
             controller.startBlink()
             stop = input("Press any key to stop blinking: ")
             controller.stopBlink()
-
-    exit = input("Enter y to exit, any other key to go again! ")
+        else:
+            print("That wasn't a valid answer...\n")
+    exit = input("Press any key to go again, or 'y' to exit! ")
