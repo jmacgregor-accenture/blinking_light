@@ -1,0 +1,8 @@
+# Apple's oddness
+**/.DS_Store
+
+# Pip/Poetry
+**/*.egg-info
+
+# Python
+**/__pycache__/*
