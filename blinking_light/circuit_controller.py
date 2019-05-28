@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+import threading
 
 class CircuitController():
 
@@ -8,6 +9,7 @@ class CircuitController():
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(18, GPIO.OUT)
         self.canBlink = False
+
 
     def startBlink(self):
         self.canBlink = True
@@ -21,11 +23,13 @@ class CircuitController():
             time.sleep(1)
             GPIO.output(18, False)
             time.sleep(1)
+        
 
     def stopBlink(self):
         self.canBlink = False
 
     def blinkFor(self, secondsToBlink):
+        timer = int(secondsToBlink)
         self.startBlink()
-        time.sleep(secondsToBlink)
+        time.sleep(timer)
         self.stopBlink()
