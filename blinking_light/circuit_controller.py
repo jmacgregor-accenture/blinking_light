@@ -1,4 +1,8 @@
-import RPi.GPIO as GPIO
+from blinking_light import __devenv__
+if __devenv__:
+    from blinking_light.my_fake_rpigio import fake_rpigio as GPIO
+else:
+    import RPi.GPIO as GPIO
 import time
 import threading
 

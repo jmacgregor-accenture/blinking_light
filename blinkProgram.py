@@ -1,5 +1,9 @@
 from blinking_light.circuit_controller import CircuitController
-import time
+import os
+
+isDev = os.path.isfile('/__devenv__.py')
+
+print(isDev)
 
 exit = ""
 controller = CircuitController()

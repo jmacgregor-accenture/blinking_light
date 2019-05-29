@@ -6,3 +6,6 @@
 
 # Python
 **/__pycache__/*
+
+# Dev environment file
+**/__dev__.py
