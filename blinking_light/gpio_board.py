@@ -11,7 +11,7 @@ class GpioBoard():
     portNumber = 0
     portMode = None
     boardMode = None
-
+    portPowered = False
 
     def __init__(self, boardMode):
         if boardMode == "BCM":
@@ -29,3 +29,10 @@ class GpioBoard():
         self.portEnabled = True
         self.portNumber = portNumber
         self.portMode = portMode
+
+    def powerOn(self):
+        if self.portEnabled == True:
+            GPIO.output(self.portNumber, True)
+            self.portPowered = True
+
+        

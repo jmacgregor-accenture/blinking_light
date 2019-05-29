@@ -18,3 +18,14 @@ def test_gpioBoardCanEnablePort():
     assert board.portEnabled == True
     assert board.portMode == GPIO.OUT
     assert board.portNumber == port
+
+def test_gpioBoardCanSendPowerToPort():
+    boardMode = GPIO.BCM
+    port = 18
+    mode = "OUT"
+    board = GpioBoard(boardMode)
+    board.enablePort(port, mode)
+
+    board.powerOn()
+
+    assert board.portPowered == True

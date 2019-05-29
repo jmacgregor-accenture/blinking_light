@@ -9,3 +9,6 @@ def setmode(mode):
 
 def setup(port, mode):
     return True
+
+def output(portNumber, powerOn):
+    return True
