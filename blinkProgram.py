@@ -1,4 +1,5 @@
 from blinking_light.circuit_controller import CircuitController
+import time
 
 exit = ""
 controller = CircuitController()
@@ -33,3 +34,4 @@ while exit != "y":
         exit = input("Press any key to go again, or 'y' to exit! ")
     finally:
         controller.stopBlink()
+        controller.powerOff()

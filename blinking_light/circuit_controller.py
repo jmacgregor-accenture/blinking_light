@@ -27,10 +27,16 @@ class CircuitController():
 
     def _blink(self):
         while self.canBlink == True:
-            GPIO.output(18, True)
+            self.powerOn()
             time.sleep(self.timeOn)
-            GPIO.output(18, False)
+            self.powerOff()
             time.sleep(self.timeOff)
+            
+    def powerOn(self):
+        GPIO.output(18, True)
+        
+    def powerOff(self):
+        GPIO.output(18, False)
 
     def stopBlink(self):
         self.canBlink = False
