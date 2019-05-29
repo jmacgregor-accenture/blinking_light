@@ -35,6 +35,7 @@ def test_gpioBoardCanSendPowerToPort():
 def test_gpioBoardCanShutOffPowerToPort():
     board = createBoardAndEnablePort()
 
+    board.powerOn()
     board.powerOff()
 
     assert board.portPowered == False
