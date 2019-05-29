@@ -35,4 +35,7 @@ class GpioBoard():
             GPIO.output(self.portNumber, True)
             self.portPowered = True
 
-        
+    def powerOff(self):
+        if self.portPowered == True:
+            GPIO.output(self.portNumber, False)
+            self.portPowered = False
