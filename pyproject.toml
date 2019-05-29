@@ -1,13 +1,11 @@
 [tool.poetry]
 name = "blinking_light"
 version = "0.1.0"
-description = ""
+description = "A little object oriented python practice that let's one turn on and off various lights"
 authors = ["John MacGregor <jmacgregor@pillartechnology.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
-"rpi.gpio-def" = "^0.2.0"
-"fakeRPiGPIO" = "0.3a1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
