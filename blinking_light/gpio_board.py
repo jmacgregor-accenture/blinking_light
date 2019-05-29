@@ -39,3 +39,12 @@ class GpioBoard():
         if self.portPowered == True:
             GPIO.output(self.portNumber, False)
             self.portPowered = False
+
+    def cleanUp(self):
+        if self.portPowered == True:
+            self.powerOff()
+        GPIO.cleanup()
+        self.portEnabled = False
+        self.portNumber = 0
+        self.portMode = None
+        self.boardMode = None

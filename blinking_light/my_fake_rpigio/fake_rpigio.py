@@ -12,3 +12,6 @@ def setup(port, mode):
 
 def output(portNumber, powerOn):
     return True
+
+def cleanup():
+    return True

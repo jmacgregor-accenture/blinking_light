@@ -39,3 +39,14 @@ def test_gpioBoardCanShutOffPowerToPort():
     board.powerOff()
 
     assert board.portPowered == False
+
+def test_gpioBoardCanCleanUp():
+    board = createBoardAndEnablePort()
+    board.powerOn()
+
+    board.cleanUp()
+
+    assert board.portEnabled == False
+    assert board.portPowered == False
+    assert board.boardMode == None
+    assert board.portMode == None
