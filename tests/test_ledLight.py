@@ -14,3 +14,12 @@ def test_canTurnOn():
     light.turnOn()
 
     assert light.isOn == True
+
+def test_canTurnOff():
+    port = GpioPort(7, "OUT")
+    light = LedLight(port)
+    light.turnOn()
+
+    light.turnOff()
+
+    assert light.isOn == False

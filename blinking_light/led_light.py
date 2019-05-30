@@ -6,3 +6,7 @@ class LedLight():
     def turnOn(self):
         self.port.powerOn()
         self.isOn = True
+
+    def turnOff(self):
+        self.port.powerOff()
+        self.isOn = False
