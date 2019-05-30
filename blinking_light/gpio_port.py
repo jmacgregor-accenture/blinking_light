@@ -9,12 +9,18 @@ class GpioPort():
 
     portNumber = None
     portConfig = None
-    isEnabled = None
+    isEnabled = False
+    isPowered = False
 
     def __init__(self, portNumber, config):
         self.portNumber = portNumber
         self.portConfig = self._getGpioConfig(config)
         self._enablePort()
+
+    def powerOn(self):
+        if self.isEnabled:
+            GPIO.output(self.portNumber, True)
+            self.isPowered = True
 
     def _getGpioConfig(self, config):
         if str(config).lower() == "out":

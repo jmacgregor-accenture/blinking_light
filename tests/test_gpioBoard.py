@@ -2,9 +2,8 @@ from blinking_light.gpio_board import GpioBoard
 from blinking_light.my_fake_rpigio import fake_rpigio as GPIO
 
 
-def createBoardAndEnablePort():
+def createBoard():
     board = GpioBoard("BCM")
-    board.enablePort(18, "OUT")
     return board
 
 def test_gpioBoardHasBoardConfiguration():
@@ -13,40 +12,9 @@ def test_gpioBoardHasBoardConfiguration():
 
     assert board.config == GPIO.BCM
 
-def test_gpioBoardCanEnablePort():
-    boardMode = GPIO.BCM
-    port = 18
-    mode = "OUT"
-    board = GpioBoard(boardMode)
-
-    board.enablePort(port, mode)
-
-    assert board.portEnabled == True
-    assert board.portMode == GPIO.OUT
-    assert board.portNumber == port
-
-def test_gpioBoardCanSendPowerToPort():
-    board = createBoardAndEnablePort()
-
-    board.powerOn()
-
-    assert board.portPowered == True
-
-def test_gpioBoardCanShutOffPowerToPort():
-    board = createBoardAndEnablePort()
-
-    board.powerOn()
-    board.powerOff()
-
-    assert board.portPowered == False
-
 def test_gpioBoardCanCleanUp():
-    board = createBoardAndEnablePort()
-    board.powerOn()
+    board = createBoard()
 
     board.cleanUp()
 
-    assert board.portEnabled == False
-    assert board.portPowered == False
     assert board.boardMode == None
-    assert board.portMode == None

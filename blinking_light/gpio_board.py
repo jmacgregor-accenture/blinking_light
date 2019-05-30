@@ -7,9 +7,7 @@ else:
 
 class GpioBoard():
     
-    portEnabled = False
-    portNumber = 0
-    portMode = None
+    portEnabled = True
     config = None
     portPowered = False
 
@@ -20,15 +18,6 @@ class GpioBoard():
         GPIO.setwarnings(False)
         GPIO.setmode(boardConfig)
         self.config = boardConfig
-
-    def enablePort(self, portNumber, portMode):
-        if portMode == "OUT":
-            portMode = GPIO.OUT
-        
-        GPIO.setup(portNumber, portMode)
-        self.portEnabled = True
-        self.portNumber = portNumber
-        self.portMode = portMode
 
     def powerOn(self):
         if self.portEnabled == True:
