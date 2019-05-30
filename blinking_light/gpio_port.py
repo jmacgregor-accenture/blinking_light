@@ -13,12 +13,14 @@ class GpioPort():
 
     def __init__(self, portNumber, config):
         self.portNumber = portNumber
+        self.portConfig = self._getGpioConfig(config)
+        self._enablePort()
 
+    def _getGpioConfig(self, config):
         if str(config).lower() == "out":
-            config = GPIO.OUT
+            return GPIO.OUT
 
-        self.portConfig = config
-
+    def _enablePort(self):
         if self.portNumber != None and self.portConfig != None:
             GPIO.setup(self.portNumber, self.portConfig)
             self.isEnabled = True
