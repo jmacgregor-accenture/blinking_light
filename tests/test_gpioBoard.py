@@ -27,4 +27,18 @@ def test_gpioBoardCanCleanUp():
 
     board.cleanUp()
 
-    assert board.boardMode == None
+    assert board.config == None
+
+def test_gpioBoardCleansUpPorts():
+    board = createBoard()
+    port = GpioPort(18, "out")
+    assert port.isEnabled is True
+    board.addPort(port)
+
+    loadedPort = board.ports[1]
+    assert loadedPort.portNumber is 18
+    assert loadedPort.isEnabled is True
+
+    board.cleanUp()
+
+    assert board.ports[0].isEnabled == False
