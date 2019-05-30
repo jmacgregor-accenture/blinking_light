@@ -9,3 +9,4 @@ def test_gpioPortHasNumber():
 
     assert port.portNumber == portNum
     assert port.portConfig == expectedPortConfig
+    assert port.isEnabled == True

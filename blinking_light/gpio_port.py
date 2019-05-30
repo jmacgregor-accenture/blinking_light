@@ -9,6 +9,7 @@ class GpioPort():
 
     portNumber = None
     portConfig = None
+    isEnabled = None
 
     def __init__(self, portNumber, config):
         self.portNumber = portNumber
@@ -17,3 +18,7 @@ class GpioPort():
             config = GPIO.OUT
 
         self.portConfig = config
+
+        if self.portNumber != None and self.portConfig != None:
+            GPIO.setup(self.portNumber, self.portConfig)
+            self.isEnabled = True
