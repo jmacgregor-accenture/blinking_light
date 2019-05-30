@@ -1,4 +1,5 @@
 from blinking_light.gpio_board import GpioBoard
+from blinking_light.gpio_port import GpioPort
 from blinking_light.my_fake_rpigio import fake_rpigio as GPIO
 
 
@@ -11,6 +12,15 @@ def test_gpioBoardHasBoardConfiguration():
     board = GpioBoard(config)
 
     assert board.config == GPIO.BCM
+
+def test_gpioBoardHasPorts():
+    board = createBoard()
+    port = GpioPort(22, "out")
+
+    board.addPort(port)
+
+    assert len(board.ports) == 1
+    assert board.ports[0] == port
 
 def test_gpioBoardCanCleanUp():
     board = createBoard()

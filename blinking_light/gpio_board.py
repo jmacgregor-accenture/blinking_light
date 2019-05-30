@@ -7,9 +7,8 @@ else:
 
 class GpioBoard():
     
-    portEnabled = True
     config = None
-    portPowered = False
+    ports = []
 
     def __init__(self, boardConfig):
         if boardConfig == "BCM":
@@ -19,21 +18,12 @@ class GpioBoard():
         GPIO.setmode(boardConfig)
         self.config = boardConfig
 
-    def powerOn(self):
-        if self.portEnabled == True:
-            GPIO.output(self.portNumber, True)
-            self.portPowered = True
-
-    def powerOff(self):
-        if self.portPowered == True:
-            GPIO.output(self.portNumber, False)
-            self.portPowered = False
+    def addPort(self, port):
+        self.ports.append(port)
 
     def cleanUp(self):
-        if self.portPowered == True:
-            self.powerOff()
+        for port in self.ports:
+            port.cleanUp()
+            
         GPIO.cleanup()
-        self.portEnabled = False
-        self.portNumber = 0
-        self.portMode = None
-        self.boardMode = None
+        self.config = None
