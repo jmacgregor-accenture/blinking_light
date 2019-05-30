@@ -1,39 +1,39 @@
 from blinking_light.gpio_board import GpioBoard
 from blinking_light.gpio_port import GpioPort
 from blinking_light.my_fake_rpigio import fake_rpigio as GPIO
+import pytest
 
 
-def createBoard():
-    return GpioBoard("BCM")
+class TestGpioBoard():
 
-def test_gpioBoardHasBoardConfiguration():
-    board = createBoard()
-    assert board.config == GPIO.BCM
+    @pytest.fixture
+    def board(self):
+        return GpioBoard("BCM")
 
-def test_gpioBoardHasPorts():
-    board = createBoard()
-    port = GpioPort(22, "out")
+    def test_gpioBoardHasBoardConfiguration(self, board):
+        assert board.config == GPIO.BCM
 
-    board.addPort(port)
+    def test_gpioBoardHasPorts(self, board):
+        port = GpioPort(22, "out")
 
-    assert len(board.ports) == 1
-    assert board.ports[0] == port
+        board.addPort(port)
 
-def test_gpioBoardCanCleanUp():
-    board = createBoard()
-    board.cleanUp()
+        assert len(board.ports) == 1
+        assert board.ports[0] == port
 
-    assert board.config == None
+    def test_gpioBoardCanCleanUp(self, board):
+        board.cleanUp()
 
-def test_gpioBoardCleansUpPorts():
-    board = createBoard()
-    port = GpioPort(18, "out")
-    board.addPort(port)
+        assert board.config == None
 
-    loadedPort = board.ports[0]
-    assert loadedPort.portNumber is 18
-    assert loadedPort.isEnabled is True
+    def test_gpioBoardCleansUpPorts(self, board):
+        port = GpioPort(18, "out")
+        board.addPort(port)
 
-    board.cleanUp()
+        loadedPort = board.ports[0]
+        assert loadedPort.portNumber is 18
+        assert loadedPort.isEnabled is True
 
-    assert board.ports[0].isEnabled == False
+        board.cleanUp()
+
+        assert board.ports[0].isEnabled == False

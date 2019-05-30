@@ -1,53 +1,52 @@
 from blinking_light.gpio_port import GpioPort
 from blinking_light.my_fake_rpigio import fake_rpigio as GPIO
+import pytest
 
 
-def createPort():
-    portNum = 18
-    portConfig = "out"
-    return GpioPort(portNum, portConfig)
+class TestGpioPort():
 
-def test_gpioPortHasNumber():
-    expectedPortConfig = GPIO.OUT
-    port = createPort()
+    @pytest.fixture
+    def port(self):
+        portNum = 18
+        portConfig = "out"
+        return GpioPort(portNum, portConfig)
 
-    assert port.portNumber == 18
-    assert port.portConfig == expectedPortConfig
-    assert port.isEnabled == True
+    def test_gpioPortHasNumber(self, port):
+        expectedPortConfig = GPIO.OUT
 
-def test_gpioPortCanTurnOnPower():
-    port = createPort()
+        assert port.portNumber == 18
+        assert port.portConfig == expectedPortConfig
+        assert port.isEnabled == True
 
-    port.powerOn()
+    def test_gpioPortCanTurnOnPower(self, port):
+        port.powerOn()
 
-    assert port.isPowered == True
+        assert port.isPowered == True
 
-def test_gpioPortDoesNotPowerIfConfigIsBad():
-    portNum = 18
-    portConfig = "purple"
-    port = GpioPort(portNum, portConfig)
+    def test_gpioPortDoesNotPowerIfConfigIsBad(self):
+        portNum = 18
+        portConfig = "purple"
+        port = GpioPort(portNum, portConfig)
 
-    port.powerOn()
+        port.powerOn()
 
-    assert port.isPowered == False
+        assert port.isPowered == False
 
-def test_gpioPortPowersOff():
-    port = createPort()
-    port.powerOn()
+    def test_gpioPortPowersOff(self, port):
+        port.powerOn()
 
-    assert port.isPowered == True
+        assert port.isPowered == True
 
-    port.powerOff()
+        port.powerOff()
 
-    assert port.isPowered == False
+        assert port.isPowered == False
 
-def test_gpioPortCleansUp():
-    port = createPort()
-    port.powerOn()
+    def test_gpioPortCleansUp(self, port):
+        port.powerOn()
 
-    assert port.isPowered == True
+        assert port.isPowered == True
 
-    port.cleanUp()
+        port.cleanUp()
 
-    assert port.isPowered == False
-    assert port.isEnabled == False
+        assert port.isPowered == False
+        assert port.isEnabled == False

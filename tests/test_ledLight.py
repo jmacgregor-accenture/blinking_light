@@ -1,25 +1,26 @@
 from blinking_light.gpio_port import GpioPort
 from blinking_light.led_light import LedLight
+import pytest
 
-def test_ledLightHasGpioBoard():
-    port = GpioPort(7, "OUT")
-    light = LedLight(port)
 
-    assert isinstance(light.port, GpioPort)
+class TestLedLight:
 
-def test_canTurnOn():
-    port = GpioPort(7, "OUT")
-    light = LedLight(port)
+    @pytest.fixture
+    def light(self):
+        port = GpioPort(7, "OUT")
+        return LedLight(port)
 
-    light.turnOn()
+    def test_ledLightHasGpioBoard(self, light):
+        assert isinstance(light.port, GpioPort)
 
-    assert light.isOn == True
+    def test_canTurnOn(self, light):
+        light.turnOn()
 
-def test_canTurnOff():
-    port = GpioPort(7, "OUT")
-    light = LedLight(port)
-    light.turnOn()
+        assert light.isOn == True
 
-    light.turnOff()
+    def test_canTurnOff(self, light):
+        light.turnOn()
 
-    assert light.isOn == False
+        light.turnOff()
+
+        assert light.isOn == False
