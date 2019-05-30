@@ -4,13 +4,10 @@ from blinking_light.my_fake_rpigio import fake_rpigio as GPIO
 
 
 def createBoard():
-    board = GpioBoard("BCM")
-    return board
+    return GpioBoard("BCM")
 
 def test_gpioBoardHasBoardConfiguration():
-    config = "BCM"
-    board = GpioBoard(config)
-
+    board = createBoard()
     assert board.config == GPIO.BCM
 
 def test_gpioBoardHasPorts():
@@ -24,7 +21,6 @@ def test_gpioBoardHasPorts():
 
 def test_gpioBoardCanCleanUp():
     board = createBoard()
-
     board.cleanUp()
 
     assert board.config == None
@@ -32,10 +28,9 @@ def test_gpioBoardCanCleanUp():
 def test_gpioBoardCleansUpPorts():
     board = createBoard()
     port = GpioPort(18, "out")
-    assert port.isEnabled is True
     board.addPort(port)
 
-    loadedPort = board.ports[1]
+    loadedPort = board.ports[0]
     assert loadedPort.portNumber is 18
     assert loadedPort.isEnabled is True
 

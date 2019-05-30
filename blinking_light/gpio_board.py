@@ -6,9 +6,6 @@ else:
 
 
 class GpioBoard():
-    
-    config = None
-    ports = []
 
     def __init__(self, boardConfig):
         if boardConfig == "BCM":
@@ -17,6 +14,7 @@ class GpioBoard():
         GPIO.setwarnings(False)
         GPIO.setmode(boardConfig)
         self.config = boardConfig
+        self.ports = []
 
     def addPort(self, port):
         self.ports.append(port)
@@ -24,6 +22,6 @@ class GpioBoard():
     def cleanUp(self):
         for port in self.ports:
             port.cleanUp()
-            
+
         GPIO.cleanup()
         self.config = None
