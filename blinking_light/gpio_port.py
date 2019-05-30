@@ -22,6 +22,11 @@ class GpioPort():
             GPIO.output(self.portNumber, True)
             self.isPowered = True
 
+    def powerOff(self):
+        if self.isPowered:
+            GPIO.output(self.portNumber, False)
+            self.isPowered = False
+
     def _getGpioConfig(self, config):
         if str(config).lower() == "out":
             return GPIO.OUT

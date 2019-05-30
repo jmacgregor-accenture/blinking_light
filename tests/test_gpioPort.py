@@ -28,4 +28,15 @@ def test_gpioPortDoesNotPowerIfConfigIsBad():
     port.powerOn()
 
     assert port.isPowered == False
-    
+
+def test_gpioPortPowersOff():
+    portNum = 18
+    portConfig = "out"
+    port = GpioPort(portNum, portConfig)
+    port.powerOn()
+
+    assert port.isPowered == True
+
+    port.powerOff()
+
+    assert port.isPowered == False
