@@ -2,19 +2,21 @@ from blinking_light.gpio_port import GpioPort
 from blinking_light.my_fake_rpigio import fake_rpigio as GPIO
 
 
-def test_gpioPortHasNumber():
+def createPort():
     portNum = 18
-    expectedPortConfig = GPIO.OUT
-    port = GpioPort(portNum, "out")
+    portConfig = "out"
+    return GpioPort(portNum, portConfig)
 
-    assert port.portNumber == portNum
+def test_gpioPortHasNumber():
+    expectedPortConfig = GPIO.OUT
+    port = createPort()
+
+    assert port.portNumber == 18
     assert port.portConfig == expectedPortConfig
     assert port.isEnabled == True
 
 def test_gpioPortCanTurnOnPower():
-    portNum = 18
-    portConfig = "out"
-    port = GpioPort(portNum, portConfig)
+    port = createPort()
 
     port.powerOn()
 
@@ -30,9 +32,7 @@ def test_gpioPortDoesNotPowerIfConfigIsBad():
     assert port.isPowered == False
 
 def test_gpioPortPowersOff():
-    portNum = 18
-    portConfig = "out"
-    port = GpioPort(portNum, portConfig)
+    port = createPort()
     port.powerOn()
 
     assert port.isPowered == True
@@ -40,3 +40,14 @@ def test_gpioPortPowersOff():
     port.powerOff()
 
     assert port.isPowered == False
+
+def test_gpioPortCleansUp():
+    port = createPort()
+    port.powerOn()
+
+    assert port.isPowered == True
+
+    port.cleanUp()
+
+    assert port.isPowered == False
+    assert port.isEnabled == False

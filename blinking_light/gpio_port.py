@@ -27,6 +27,11 @@ class GpioPort():
             GPIO.output(self.portNumber, False)
             self.isPowered = False
 
+    def cleanUp(self):
+        self.powerOff()
+        GPIO.cleanup()
+        self.isEnabled = False
+
     def _getGpioConfig(self, config):
         if str(config).lower() == "out":
             return GPIO.OUT
