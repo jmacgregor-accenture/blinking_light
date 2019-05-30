@@ -10,16 +10,16 @@ class GpioBoard():
     portEnabled = False
     portNumber = 0
     portMode = None
-    boardMode = None
+    config = None
     portPowered = False
 
-    def __init__(self, boardMode):
-        if boardMode == "BCM":
-            boardMode = GPIO.BCM
+    def __init__(self, boardConfig):
+        if boardConfig == "BCM":
+            boardConfig = GPIO.BCM
 
         GPIO.setwarnings(False)
-        GPIO.setmode(boardMode)
-        self.boardMode = boardMode
+        GPIO.setmode(boardConfig)
+        self.config = boardConfig
 
     def enablePort(self, portNumber, portMode):
         if portMode == "OUT":

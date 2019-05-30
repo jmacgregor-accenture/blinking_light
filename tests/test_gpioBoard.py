@@ -7,11 +7,11 @@ def createBoardAndEnablePort():
     board.enablePort(18, "OUT")
     return board
 
-def test_gpioBoardHasBoardMode():
-    mode = "BCM"
-    board = GpioBoard(mode)
+def test_gpioBoardHasBoardConfiguration():
+    config = "BCM"
+    board = GpioBoard(config)
 
-    assert board.boardMode == GPIO.BCM
+    assert board.config == GPIO.BCM
 
 def test_gpioBoardCanEnablePort():
     boardMode = GPIO.BCM
