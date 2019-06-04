@@ -64,8 +64,9 @@ class ProgramLoop():
             self.setupSolidLeds(numberOfLights)
 
     def setupBlinkingLights(self, numberOfLights):
+        lightNumber = 1
         while numberOfLights > 0:
-            portNumber = int(input(str.format("What port is light #{0} connected to? ", numberOfLights)))
+            portNumber = int(input(str.format("What port is light #{0} connected to? ", lightNumber)))
             color = input("What color is this light? ")
             onTime = int(input("How many seconds should the light be on during each blink? "))
             offTime = int(input("How many seconds should the light be off during each blink? "))
@@ -75,6 +76,7 @@ class ProgramLoop():
             light = Blinker(port, color, onTime, offTime)
             self.setup.addLed(light)
 
+            lightNumber += 1
             numberOfLights -= 1
 
     def setupSolidLeds(self, numberOfLights):
