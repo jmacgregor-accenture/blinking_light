@@ -25,7 +25,7 @@ class TestCircuitSetup():
 
     def test_circuitSetup_can_add_lights(self, circuitSetup, newPort):
         circuitSetup.addPort(newPort)
-        led = LedLight(newPort)
+        led = LedLight(newPort, "red")
 
         circuitSetup.addLed(led)
 

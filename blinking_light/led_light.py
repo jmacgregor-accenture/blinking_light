@@ -1,7 +1,10 @@
+from blinking_light.colors import Colors
+
 class LedLight():
 
-    def __init__(self, port):
+    def __init__(self, port, color):
         self.port = port
+        self.color = Colors.getColor(color)
         self.isOn = False
         self.on_counter = 0
 
