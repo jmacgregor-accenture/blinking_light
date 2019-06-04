@@ -3,6 +3,7 @@ from blinking_light.led_light import LedLight
 from blinking_light.gpio_port import GpioPort
 import time
 import pytest
+import pytest_mock
 
 
 class TestBlinker:
@@ -31,14 +32,21 @@ class TestBlinker:
         assert blinker.isOn == False
 
     def test_blinker_keepOn_switches_keepBlinking_flag(self, blinker):
-        blinker.keepOn()
+        blinker.switchOn()
 
         assert blinker.keepBlinking == True
 
     def test_blinker_switchOff_switches_keepBlinking_flag(self, blinker):
-        blinker.keepOn()
+        blinker.switchOn()
 
         blinker.switchOff()
 
         assert blinker.keepBlinking == False
+
+    def test_blink_switchOn_calls_startLoop(self, blinker, mocker):
+        mocker.spy(blinker, '_startLoop')
+
+        blinker.switchOn()
+
+        assert blinker._startLoop.call_count == 1
 

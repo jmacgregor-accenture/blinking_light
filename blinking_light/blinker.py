@@ -17,8 +17,12 @@ class Blinker(LedLight):
             self.turnOff()
             run_duration += on_seconds+off_seconds
 
-    def keepOn(self):
+    def switchOn(self):
         self.keepBlinking = True
+        self._startLoop()
 
     def switchOff(self):
         self.keepBlinking = False
+
+    def _startLoop(self):
+        pass
