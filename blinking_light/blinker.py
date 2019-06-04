@@ -10,13 +10,18 @@ else:
 
 class Blinker(LedLight):
     
-    def start(self, on_seconds, off_seconds, total_duration):
+    def __init__(self, port, on_seconds, off_seconds):
+        self.port = port
+        self.onSeconds = on_seconds
+        self.offSeconds = off_seconds
+
+    def start(self, total_duration):
         run_duration = 0
         self.on_counter = 0
 
         while run_duration < total_duration:
-            self._blink(on_seconds, off_seconds)
-            run_duration += on_seconds+off_seconds
+            self._blink()
+            run_duration += self.onSeconds + self.offSeconds
 
     def switchOn(self):
         self.keepBlinking = True
@@ -31,13 +36,10 @@ class Blinker(LedLight):
 
     def _startLoop(self):
         while self.keepBlinking == True:
-            self.turnOn()
-            time.sleep(1)
-            self.turnOff()
-            time.sleep(1)
+            self._blink()
 
-    def _blink(self, on_seconds, off_seconds):
+    def _blink(self):
         self.turnOn()
-        time.sleep(on_seconds)
+        time.sleep(self.onSeconds)
         self.turnOff()
-        time.sleep(off_seconds)
+        time.sleep(self.offSeconds)
