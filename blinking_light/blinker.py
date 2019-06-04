@@ -1,5 +1,6 @@
 from blinking_light import __devenv__
 from blinking_light.led_light import LedLight
+from blinking_light.colors import Colors
 import threading
 import time
 if __devenv__:
@@ -10,8 +11,9 @@ else:
 
 class Blinker(LedLight):
     
-    def __init__(self, port, on_seconds, off_seconds):
+    def __init__(self, port, color, on_seconds, off_seconds):
         self.port = port
+        self.color = Colors.getColor(color)
         self.onSeconds = on_seconds
         self.offSeconds = off_seconds
 
