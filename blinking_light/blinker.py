@@ -29,7 +29,6 @@ class Blinker(LedLight):
         self.thread.daemon = True
         self.thread.start()
 
-
     def switchOff(self):
         self.keepBlinking = False
         self.thread.join()
