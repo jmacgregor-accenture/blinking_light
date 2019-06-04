@@ -65,7 +65,7 @@ class ProgramLoop():
 
     def setupBlinkingLights(self, numberOfLights):
         while numberOfLights > 0:
-            portNumber = int(input(str.format("What port is light #{numberOfLights} connected to? ")))
+            portNumber = int(input(str.format("What port is light #{0} connected to? ", numberOfLights)))
             color = input("What color is this light? ")
             onTime = int(input("How many seconds should the light be on during each blink? "))
             offTime = int(input("How many seconds should the light be off during each blink? "))
@@ -79,7 +79,7 @@ class ProgramLoop():
 
     def setupSolidLeds(self, numberOfLights):
         while numberOfLights > 0:
-            portNumber = int(input(str.format("What port is light #{numberOfLights} connected to? ")))
+            portNumber = int(input(str.format("What port is light #{0} connected to? ", numberOfLights)))
             color = input("What color is this light? ")
 
             port = GpioPort(portNumber, "out")
