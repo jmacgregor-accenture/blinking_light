@@ -29,3 +29,9 @@ class TestBlinker:
 
         assert blinker.on_counter > 0
         assert blinker.isOn == False
+
+    def test_blinker_keep_on_switches_keepBlinking_flag(self, blinker):
+        blinker.keepOn()
+
+        assert blinker.keepBlinking == True
+

@@ -6,6 +6,7 @@ authors = ["John MacGregor <jmacgregor@pillartechnology.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
+pytest-mock = "^1.10"
 
 [tool.poetry.dev-dependencies]
 pytest = "^3.0"
