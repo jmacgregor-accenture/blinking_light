@@ -12,10 +12,9 @@ else:
 class Blinker(LedLight):
     
     def __init__(self, port, color, on_seconds, off_seconds):
-        self.port = port
-        self.color = Colors.getColor(color)
         self.onSeconds = on_seconds
         self.offSeconds = off_seconds
+        super().__init__(port, color)
 
     def start(self, total_duration):
         run_duration = 0
