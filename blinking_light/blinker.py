@@ -1,5 +1,6 @@
 from blinking_light import __devenv__
 from blinking_light.led_light import LedLight
+import threading
 if __devenv__:
     from blinking_light.my_fake_rpigio import fake_rpigio as GPIO
 else:
@@ -19,7 +20,10 @@ class Blinker(LedLight):
 
     def switchOn(self):
         self.keepBlinking = True
-        self._startLoop()
+        self.thread = threading.Thread(target=self._startLoop, args=())
+        self.thread.daemon = True
+        self.thread.start()
+
 
     def switchOff(self):
         self.keepBlinking = False

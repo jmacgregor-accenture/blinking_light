@@ -43,10 +43,14 @@ class TestBlinker:
 
         assert blinker.keepBlinking == False
 
-    def test_blink_switchOn_calls_startLoop(self, blinker, mocker):
+    def test_blinker_switchOn_calls_startLoop(self, blinker, mocker):
         mocker.spy(blinker, '_startLoop')
 
         blinker.switchOn()
 
         assert blinker._startLoop.call_count == 1
 
+    def test_blinker_switchOn_starts_thread(self, blinker):
+        blinker.switchOn()
+
+        assert blinker.thread is not None
