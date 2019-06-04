@@ -53,4 +53,11 @@ class TestBlinker:
     def test_blinker_switchOn_starts_thread(self, blinker):
         blinker.switchOn()
 
-        assert blinker.thread is not None
+        assert blinker.thread.isAlive() == True
+
+    def test_blinker_switchOff_stops_thread(self, blinker):
+        blinker.switchOn()
+
+        blinker.switchOff()
+
+        assert blinker.thread.isAlive() == False
