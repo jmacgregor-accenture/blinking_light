@@ -19,3 +19,6 @@ class Blinker(LedLight):
 
     def keepOn(self):
         self.keepBlinking = True
+
+    def switchOff(self):
+        self.keepBlinking = False
